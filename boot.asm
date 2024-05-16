@@ -258,24 +258,7 @@ ret
 ;--------------------------------------------------------
 ;debug print function
 printe:
-;clear screen
-        mov ax,3
-int 10h
-	mov bx,label
-	mov al,'*'
-	cs
-	mov [bx],al
-	mov bp,100h
-	mov ax,1000h
-	mov es,ax
-	mov bh,0
-	mov bl,1
-	mov dl,1
-	mov dh,1
-	mov cx,1536
-	mov al,1
-	mov ah,13h
-int 10h
+jmp haltss
 ;--------------------------------------------------------
 ;if #.COM not find enter in halt mode to turn pc
 halts:
