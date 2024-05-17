@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>32x32 Grid</title>
+<style>
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(32, 12.5px);
+    grid-template-rows: repeat(32, 12.5px);
+    width: 400px;
+    height: 400px;
+  }
+  .cell {
+    width: 12.5px;
+    height: 12.5px;
+    background-color: yellow;
+  }
+</style>
+</head>
+<body>
+<div class="grid" id="grid"></div>
+
+<script>
+  const grid = document.getElementById('grid');
+  const numRows = 32;
+  const numCols = 32;
+  let counter = 0;
+  let counter2=0;
+
+  // Create the grid
+  for (let i = 0; i < numRows * numCols; i++) {
+    const cell = document.createElement('div');
+    cell.classList.add('cell');
+    grid.appendChild(cell);
+  }
+
+  function inc(value) {
+    return (value + 1) % (numRows * numCols);
+    
+  }
+
+  function getCoordinates(counter) {
+    const x = counter % numCols;
+    const y = Math.floor(counter / numCols);
+    return { x, y };
+  }
+
+  function toggleCell(counter) {
+    const { x, y } = getCoordinates(counter);
+    
+    const index = y * numCols + x;
+    
+    const cell = grid.children[index];
+    if(counter2==0)cell.style.backgroundColor =  'black';
+    if(counter2==1)cell.style.backgroundColor =  'yellow';
+  }
+
+  function updateGrid() {
+    
+    toggleCell(counter);
+    counter = inc(counter);
+    document.title = `Counter: ${counter}`;
+    if(counter==0)counter2++;
+    if(counter2==2)counter2=0;
+    
+  }
+
+  setInterval(updateGrid, 10);
+</script>
+</body>
+</html>
+
