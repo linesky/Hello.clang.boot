@@ -51,7 +51,7 @@ class BareboneBuilder:
         self.text_area.delete(1.0, tk.END)
         filename = tk.filedialog.asksaveasfilename(title="save file")
         if 0==0:
-            self.execute_command("find /mnt/isos/. | cpio  -ov -H tar > $filename".replace("$filename",filename),True)
+            self.execute_command("find /mnt/isos | cpio  -ov -H tar > $filename".replace("$filename",filename),True)
             self.execute_command("chmod 777 $filename".replace("$filename",filename),True)
        
         
