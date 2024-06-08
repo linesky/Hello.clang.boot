@@ -45,7 +45,7 @@ class BareboneBuilder:
         self.text_area.delete(1.0, tk.END)
         self.text_area.insert(tk.END,f"open image")
         self.execute_command('dd if=/dev/zero of="image" bs=1k count=100000',True)
-        self.execute_command('sudo mkfs.vfat "image"  ',True)
+        self.execute_command('sudo mkfs.vfat "image" -S 4096 ',True)
         self.execute_command('sudo chmod 777 "image"',True)
         self.execute_command('sudo chmod 777 "f1"',True)
         self.execute_command("mkdir /mnt/isos",False)
@@ -57,7 +57,9 @@ class BareboneBuilder:
         filename = tk.filedialog.askopenfilename(title="Select file to build")
         if 0==0:
             self.execute_command('cpio  -i -F "$filename" '.replace("$filename",filename),True)
-            
+            f1=open("/mnt/isos/linuxrc","w")
+            f1.write("/bin/ash")
+            f1.close()
        
         
 
