@@ -37,7 +37,8 @@ class BareboneBuilder:
                 self.text_area.insert(tk.END,f"Error executing command:\n{e.output}")
 
     def build_kernel(self):#filename = tk.filedialog.askdirectory(title="Select folder to build")
-        f1=open("f1","w")
+        f1=open("f1.sh","w")
+        f1.write('nautilus --browser /mnt/isos & \n nautilus --browser /mnt/isos2 &')
         f1.close() 
         self.text_area.delete(1.0, tk.END)
         self.text_area.insert(tk.END,f"open image")
@@ -51,8 +52,8 @@ class BareboneBuilder:
         self.execute_command("sudo chmod 777 /mnt/isos",False)
         self.execute_command('sudo mount "$filename" /mnt/isos -o loop'.replace("$filename",filename),True)
         self.execute_command('sudo mount "out.img" /mnt/isos2 -o loop',True)
-        self.execute_command('nautilus --browser /mnt/isos &',True)
-        self.execute_command('nautilus --browser /mnt/isos2 &',True)
+        self.execute_command('/usr/bin/bash f1.sh',True)
+        
     def run_kernel(self):
         self.text_area.delete(1.0, tk.END)
         filename = tk.filedialog.askopenfilename(title="Select file to build")
